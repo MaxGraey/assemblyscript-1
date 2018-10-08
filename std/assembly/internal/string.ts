@@ -6,6 +6,72 @@ export const HEADER_SIZE = (offsetof<String>() + 1) & ~1; // 2 byte aligned
 /** Maximum length of a String. */
 export const MAX_LENGTH = (<i32>MAX_SIZE_32 - HEADER_SIZE) >>> 1;
 
+// Helpers
+export const enum CharCode {
+  DQUOTE = 0x22, // "
+  QUOTE  = 0x27, // '
+  PLUS   = 0x2B, // '+'
+  COMMA  = 0x2C, // ','
+  MINUS  = 0x2D, // '-'
+  DOT    = 0x2E, // '.'
+  COLON  = 0x3A, // ':'
+  LSBRT  = 0x5B, // '['
+  RSBRT  = 0x5D, // ']'
+  LCBRT  = 0x7B, // '{'
+  RCBRT  = 0x7D, // '}'
+  LSLASH = 0x5C, // '\'
+  RSLASH = 0x2F, // '/'
+
+  _0 = 0x30,
+  _1 = 0x31,
+  _2 = 0x32,
+  _3 = 0x33,
+  _4 = 0x34,
+  _5 = 0x35,
+  _6 = 0x36,
+  _7 = 0x37,
+  _8 = 0x38,
+  _9 = 0x39,
+
+  A = 0x41,
+  B = 0x42,
+  E = 0x45,
+  F = 0x46,
+  N = 0x4E,
+  O = 0x4F,
+  R = 0x52,
+  T = 0x54,
+  X = 0x58,
+  Z = 0x5A,
+
+  a = 0x61,
+  b = 0x62,
+  e = 0x65,
+  f = 0x66,
+  n = 0x6E,
+  o = 0x6F,
+  r = 0x72,
+  t = 0x74,
+  x = 0x78,
+  z = 0x7A
+}
+
+export function isWhiteSpaceOrLineTerminator(c: u16): bool {
+  switch (c) {
+    case 9:    // <TAB>
+    case 10:   // <LF>
+    case 13:   // <CR>
+    case 11:   // <VT>
+    case 12:   // <FF>
+    case 32:   // <SP>
+    case 160:  // <NBSP>
+    case 8232: // <LS>
+    case 8233: // <PS>
+    case 65279: return true; // <ZWNBSP>
+    default: return false;
+  }
+}
+
 // Low-level utility
 
 function __gc(ref: usize): void {}
@@ -104,54 +170,6 @@ export function repeatUnsafe(dest: String, destOffset: usize, src: String, count
         break;
       }
     }
-  }
-}
-
-// Helpers
-
-export const enum CharCode {
-  PLUS = 0x2B,
-  MINUS = 0x2D,
-  DOT = 0x2E,
-  _0 = 0x30,
-  _1 = 0x31,
-  _2 = 0x32,
-  _3 = 0x33,
-  _4 = 0x34,
-  _5 = 0x35,
-  _6 = 0x36,
-  _7 = 0x37,
-  _8 = 0x38,
-  _9 = 0x39,
-  A = 0x41,
-  B = 0x42,
-  E = 0x45,
-  N = 0x4E,
-  O = 0x4F,
-  X = 0x58,
-  Z = 0x5a,
-  a = 0x61,
-  b = 0x62,
-  e = 0x65,
-  n = 0x6E,
-  o = 0x6F,
-  x = 0x78,
-  z = 0x7A
-}
-
-export function isWhiteSpaceOrLineTerminator(c: u16): bool {
-  switch (c) {
-    case 9:    // <TAB>
-    case 10:   // <LF>
-    case 13:   // <CR>
-    case 11:   // <VT>
-    case 12:   // <FF>
-    case 32:   // <SP>
-    case 160:  // <NBSP>
-    case 8232: // <LS>
-    case 8233: // <PS>
-    case 65279: return true; // <ZWNBSP>
-    default: return false;
   }
 }
 
