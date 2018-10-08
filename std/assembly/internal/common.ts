@@ -1,4 +1,6 @@
 
+import { loadUnsafe } from "./arraybuffer";
+
 // Total tables size: 680 bytes (instead 2472 bytes in RapidJSON version)
 
 @inline // 32 * 8 = 256 bytes
@@ -42,16 +44,19 @@ function powersNeg1(): f64[] {
 // compute 10 ** n
 @inline
 export function pow10(n: i32): f64 {
-  const powPos1 = powersPos1();
-  const powPos2 = powersPos2();
-  const powNeg1 = powersNeg1();
-  const powNeg2 = powersNeg2();
-
+  const powPos1 = <ArrayBuffer>powersPos1().buffer_;
+  const powPos2 = <ArrayBuffer>powersPos2().buffer_;
+  const powNeg1 = <ArrayBuffer>powersNeg1().buffer_;
+  const powNeg2 = <ArrayBuffer>powersNeg2().buffer_;
   if (n >= 0) {
-    return n <= 308 ? powPos1[n >> 5] * powPos2[n & 31] : Infinity;
+    return n <= 308
+      ? loadUnsafe<f64,f64>(powPos1, n >> 5) * loadUnsafe<f64,f64>(powPos2, n & 31)
+      : Infinity;
   }
   var p = -n;
-  return n >= -323 ? powNeg1[p >> 5] * powNeg2[p & 31] : 0;
+  return n >= -323
+    ? loadUnsafe<f64,f64>(powNeg1, p >> 5) * loadUnsafe<f64,f64>(powNeg2, p & 31)
+    : 0;
 }
 
 /*
