@@ -1,5 +1,5 @@
 
-// total tables size: 680 bytes
+// Total tables size: 680 bytes (instead 2472 bytes in RapidJSON version)
 
 @inline // 32 * 8 = 256 bytes
 function powersPos2(): f64[] {
@@ -53,3 +53,10 @@ export function pow10(n: i32): f64 {
   var p = -n;
   return n >= -323 ? powNeg1[p >> 5] * powNeg2[p & 31] : 0;
 }
+
+/*
+@inline
+export function fastPath(significand: f64, exp: i32): f64 {
+  return significand * pow10(exp);
+}
+*/
