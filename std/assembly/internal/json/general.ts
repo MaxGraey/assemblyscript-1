@@ -1,15 +1,40 @@
 
 export enum Type {
-  Integer,
-  Double,
-  Null,
-  False,
-  True,
-  String,
   Array,
-  Object
+  Object,
+  Bool,
+  Number,
+  String,
+  Null
 }
 
+export class KeyValue {
+  key: string;
+  value: Value;
+}
+
+export class Value {
+  private value: u64;
+
+  constructor(public type: Type) {}
+
+  @inline get number(): f64 { return reinterpret<f64>(this.value) }
+  @inline set number(value: f64): void { this.value = reinterpret<u64>(value) }
+
+  @inline get bool(): bool { return <bool>this.value }
+  @inline set bool(value: bool): void { this.value = <u64>(value) }
+
+  @inline get string(): string { return changetype<string>(<usize>this.value) }
+  @inline set string(value: string): void { this.value = changetype<usize>(value) }
+
+  @inline get array(): Value[] { return changetype<Value[]>(<usize>this.value) }
+  @inline set array(value: Value[]): void { this.value = changetype<usize>(value) }
+
+  @inline get object(): KeyValue { return changetype<KeyValue>(<usize>this.value) }
+  @inline set object(value: KeyValue): void { this.value = changetype<usize>(value) }
+}
+
+/*
 const TYPE_BITS: usize  = 3;
 const TYPE_MASK: usize  = (1 << TYPE_BITS) - 1;
 const VALUE_MASK: usize = <usize>(-1) >> TYPE_BITS;
@@ -66,3 +91,4 @@ export function isWhitespace(char: i32): bool {
   const parseFlags = parseFlagsTable();
   return (parseFlags[char] & 2) != 0;
 }
+*/

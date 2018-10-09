@@ -8,19 +8,21 @@ export const MAX_LENGTH = (<i32>MAX_SIZE_32 - HEADER_SIZE) >>> 1;
 
 // Helpers
 export const enum CharCode {
-  DQUOTE = 0x22, // "
-  QUOTE  = 0x27, // '
-  PLUS   = 0x2B, // '+'
-  COMMA  = 0x2C, // ','
-  MINUS  = 0x2D, // '-'
-  DOT    = 0x2E, // '.'
-  COLON  = 0x3A, // ':'
-  LSBRT  = 0x5B, // '['
-  RSBRT  = 0x5D, // ']'
-  LCBRT  = 0x7B, // '{'
-  RCBRT  = 0x7D, // '}'
-  LSLASH = 0x5C, // '\'
-  RSLASH = 0x2F, // '/'
+  NEWLINE = 0x0A, // '\n'
+  SPACE   = 0x20, // ' '
+  DQUOTE  = 0x22, // "
+  QUOTE   = 0x27, // '
+  PLUS    = 0x2B, // '+'
+  COMMA   = 0x2C, // ','
+  MINUS   = 0x2D, // '-'
+  DOT     = 0x2E, // '.'
+  COLON   = 0x3A, // ':'
+  LSBRT   = 0x5B, // '['
+  RSBRT   = 0x5D, // ']'
+  LCBRT   = 0x7B, // '{'
+  RCBRT   = 0x7D, // '}'
+  LSLASH  = 0x5C, // '\'
+  RSLASH  = 0x2F, // '/'
 
   _0 = 0x30,
   _1 = 0x31,
