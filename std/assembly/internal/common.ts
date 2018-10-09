@@ -3,6 +3,22 @@ import { loadUnsafe } from "./arraybuffer";
 
 // Total tables size: 680 bytes (instead 2472 bytes in RapidJSON version)
 
+@inline // 10 * 8 = 80 bytes
+function powersPos1(): f64[] {
+  const table = [
+    1e00, 1e32, 1e64, 1e96, 1e128, 1e160, 1e192, 1e224, 1e256, 1e288
+  ];
+  return table;
+}
+
+@inline // 11 * 8 = 88 bytes
+function powersNeg1(): f64[] {
+  const table = [
+    1e-00, 1e-32, 1e-64, 1e-96, 1e-128, 1e-160, 1e-192, 1e-224, 1e-256, 1e-288, 1e-320
+  ];
+  return table;
+}
+
 @inline // 32 * 8 = 256 bytes
 function powersPos2(): f64[] {
   const table = [
@@ -25,22 +41,6 @@ function powersNeg2(): f64[] {
   return table;
 }
 
-@inline // 10 * 8 = 80 bytes
-function powersPos1(): f64[] {
-  const table = [
-    1e00, 1e32, 1e64, 1e96, 1e128, 1e160, 1e192, 1e224, 1e256, 1e288
-  ];
-  return table;
-}
-
-@inline // 11 * 8 = 88 bytes
-function powersNeg1(): f64[] {
-  const table = [
-    1e-00, 1e-32, 1e-64, 1e-96, 1e-128, 1e-160, 1e-192, 1e-224, 1e-256, 1e-288, 1e-320
-  ];
-  return table;
-}
-
 // compute 10 ** n
 @inline
 export function pow10(n: i32): f64 {
@@ -59,9 +59,40 @@ export function pow10(n: i32): f64 {
     : 0;
 }
 
-/*
+// TODO move this to string.ts
+
+var _strToF64_result: f64 = 0;
+
 @inline
-export function fastPath(significand: f64, exp: i32): f64 {
+function fastPath(significand: f64, exp: i32): f64 {
   return significand * pow10(exp);
 }
-*/
+
+@inline
+function fastStrToF64(d: f64, p: i32): bool {
+  // Use fast path for string-to-double conversion if possible
+  // see http://www.exploringbinary.com/fast-path-decimal-to-floating-point-conversion/
+  if (p > 22  && p < 22 + 16) {
+    d *= pow10(p - 22);
+    p = 22;
+  }
+  if (p >= -22 && p <= 22 && d <= f64.MAX_SAFE_INTEGER) { // 2^53 - 1
+    _strToF64_result = fastPath(d, p);
+    return true;
+  }
+
+  return false;
+}
+
+@inline
+function normalStrToF64(d: f64, p: i32): f64 {
+  /*if (p < -308) {
+    // Prevent expSum < -308, making Pow10(p) = 0
+    d = fastPath(d, -308);
+    d = fastPath(d, p + 308);
+  } else {
+    d = fastPath(d, p);
+  }
+  return d;*/
+  return fastPath(d, p);
+}
