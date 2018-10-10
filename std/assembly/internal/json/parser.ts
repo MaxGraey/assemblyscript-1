@@ -32,7 +32,7 @@ export class Parser {
       let offset = this.offset;
       let data   = changetype<usize>(this.data);
       if (load<u64>(data + (offset << 1), STRING_HEADER_SIZE) == NULL_FOUR_CC) {
-        this.skipBytes(4); // skip "null".length
+        this.skip(4); // skip "null".length
         return new Value(Type.Null);
       }
     }
@@ -48,7 +48,7 @@ export class Parser {
 
       let fourChars = load<u64>(data + (offset << 1), STRING_HEADER_SIZE);
       if (fourChars == TRUE_FOUR_CC) {
-        this.skipBytes(4); // skip "true".length
+        this.skip(4); // skip "true".length
         let value = new Value(Type.Bool);
         value.bool = true;
         return value;
@@ -56,7 +56,7 @@ export class Parser {
 
       if (fourChars == FALS_FOUR_CC) {
         if (load<u16>(data + (offset << 1), STRING_HEADER_SIZE + (4 << 1)) == CharCode.e) {
-          this.skipBytes(5); // skip "false".length
+          this.skip(5); // skip "false".length
           let value = new Value(Type.Bool);
           value.bool = false;
           return value;
@@ -90,14 +90,15 @@ export class Parser {
     var index  = offset;
     for (; isWhiteSpace(load<u16>(data + (index << 1), STRING_HEADER_SIZE)); ++index) {}
     var diff = index - offset;
-    if (diff) this.skipBytes(diff);
+    if (diff) this.skip(diff);
   }
 
   private skipWhitespacesExpectOneSpace(): void {
+    var offset = this.offset;
     var data = changetype<usize>(this.data);
-    if (load<u16>(data + (this.offset << 1), STRING_HEADER_SIZE) == CharCode.SPACE) {
-      this.skipBytes(1);
-      let code = load<u16>(data + (this.offset << 1), STRING_HEADER_SIZE);
+    if (load<u16>(data + (offset << 1), STRING_HEADER_SIZE) == CharCode.SPACE) {
+      let code = load<u16>(data + (offset << 1), STRING_HEADER_SIZE + (1 << 1));
+      this.skip(1);
       if (!isWhiteSpace(code)) return;
     }
     this.skipWhitespaces();
@@ -113,8 +114,9 @@ export class Parser {
       while (index < length && load<u64>(data + (index << 1), STRING_HEADER_SIZE) == SPACES_FOUR_CC) index += 4;
       while (index < length && load<u16>(data + (index << 1), STRING_HEADER_SIZE) == CharCode.SPACE) index += 1;
 
-      // this.skipBytes(index + 1);
-      this.skipBytes(index - offset);
+      // this.skip(index + 1);
+      let diff = index - offset;
+      if (diff) this.skip(diff);
       let code = load<u16>(data + ((this.offset + index) << 1), STRING_HEADER_SIZE);
       if (!isWhiteSpace(code)) return;
     }
@@ -133,7 +135,7 @@ export class Parser {
   }
 
   @inline
-  private skipBytes(bytes: i32): void {
+  private skip(bytes: i32): void {
     assert(this.length >= bytes);
     this.offset += bytes;
     this.length -= bytes;
