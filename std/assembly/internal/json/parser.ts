@@ -122,44 +122,9 @@ export class Parser {
 
   @inline
   private static skipNonSpecialCharacters(buffer: usize, offset: usize, size: usize): usize {
-    // 0x00 <= 0x19 - skip
-    /*
-    const table: bool[] = [
-      true, // 0x00
-      true, // 0x01
-      true, // 0x02
-      true, // 0x03
-      true, // 0x04
-      true, // 0x05
-      true, // 0x06
-      true, // 0x07
-      true, // 0x08
-      true, // 0x09
-      true, // 0x0a
-      true, // 0x0b
-      true, // 0x0c
-      true, // 0x0d
-      true, // 0x0e
-      true, // 0x0f
-      true, // 0x10
-      true, // 0x11
-      true, // 0x12
-      true, // 0x13
-      true, // 0x14
-      true, // 0x15
-      true, // 0x16
-      true, // 0x17
-      true, // 0x18
-      true, // 0x19
-      false, // 0x20
-      false, // 0x21
-      true,  // 0x22
-    ];
-    */
-    buffer += offset << 1;
-    for (let index: usize = 0; index < size; ++index) {
+    for (let index = offset; index < size; ++index) {
       let code = load<u16>(buffer + (index << 1), STRING_HEADER_SIZE);
-      if ((code == CharCode.LSLASH || (code <= CharCode.DQUOTE && (code <= 0x19 || code == CharCode.DQUOTE)))) {
+      if ((code == CharCode.DQUOTE || code <= 0x19 || code == CharCode.LSLASH)) {
         return index;
       }
     }
