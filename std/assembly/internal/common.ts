@@ -1,20 +1,20 @@
 
 import { loadUnsafe } from "./arraybuffer";
 
-// Total tables size: 680 bytes (instead 2472 bytes in RapidJSON version)
+// Total tables size: 696 bytes (instead 2472 bytes in RapidJSON version)
 
-@inline // 10 * 8 = 80 bytes
+@inline // 11 * 8 = 88 bytes
 function powersPos1(): f64[] {
   const table = [
-    1e00, 1e32, 1e64, 1e96, 1e128, 1e160, 1e192, 1e224, 1e256, 1e288
+    1e00, 1e32, 1e64, 1e96, 1e128, 1e160, 1e192, 1e224, 1e256, 1e288, Infinity
   ];
   return table;
 }
 
-@inline // 11 * 8 = 88 bytes
+@inline // 12 * 8 = 92 bytes
 function powersNeg1(): f64[] {
   const table = [
-    1e-00, 1e-32, 1e-64, 1e-96, 1e-128, 1e-160, 1e-192, 1e-224, 1e-256, 1e-288, 1e-320
+    1e-00, 1e-32, 1e-64, 1e-96, 1e-128, 1e-160, 1e-192, 1e-224, 1e-256, 1e-288, 1e-320, 0.0
   ];
   return table;
 }
@@ -49,14 +49,10 @@ export function pow10(n: i32): f64 {
   const powNeg1 = <ArrayBuffer>powersNeg1().buffer_;
   const powNeg2 = <ArrayBuffer>powersNeg2().buffer_;
   if (n >= 0) {
-    return n <= 308
-      ? loadUnsafe<f64,f64>(powPos1, n >> 5) * loadUnsafe<f64,f64>(powPos2, n & 31)
-      : Infinity;
+    return loadUnsafe<f64,f64>(powPos1, min<i32>(n >> 5, 309)) * loadUnsafe<f64,f64>(powPos2, n & 31);
   }
   var p = -n;
-  return n >= -323
-    ? loadUnsafe<f64,f64>(powNeg1, p >> 5) * loadUnsafe<f64,f64>(powNeg2, p & 31)
-    : 0;
+  return loadUnsafe<f64,f64>(powNeg1, max<i32>(p >> 5, -324)) * loadUnsafe<f64,f64>(powNeg2, p & 31);
 }
 
 // TODO move this to string.ts
