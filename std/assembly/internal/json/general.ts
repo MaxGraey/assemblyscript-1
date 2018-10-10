@@ -14,6 +14,13 @@ export class KeyValue {
 }
 
 export class Value {
+  @inline static get Array(): Value  { return new Value(Type.Array) }
+  @inline static get Object(): Value { return new Value(Type.Object) }
+  @inline static get Bool(): Value   { return new Value(Type.Bool) }
+  @inline static get Number(): Value { return new Value(Type.Number) }
+  @inline static get String(): Value { return new Value(Type.String) }
+  @inline static get Null(): Value   { return new Value(Type.Null) }
+
   private value: u64;
 
   constructor(public type: Type) {}

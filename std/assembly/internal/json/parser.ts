@@ -33,7 +33,7 @@ export class Parser {
       let data   = changetype<usize>(this.data);
       if (load<u64>(data + (offset << 1), STRING_HEADER_SIZE) == NULL_FOUR_CC) {
         this.skip(4); // skip "null".length
-        return new Value(Type.Null);
+        return Value.Null;
       }
     }
     // TODO print fancy error
@@ -49,7 +49,7 @@ export class Parser {
       let fourChars = load<u64>(data + (offset << 1), STRING_HEADER_SIZE);
       if (fourChars == TRUE_FOUR_CC) {
         this.skip(4); // skip "true".length
-        let value = new Value(Type.Bool);
+        let value = Value.Bool;
         value.bool = true;
         return value;
       }
@@ -57,7 +57,7 @@ export class Parser {
       if (fourChars == FALS_FOUR_CC) {
         if (load<u16>(data + (offset << 1), STRING_HEADER_SIZE + (4 << 1)) == CharCode.e) {
           this.skip(5); // skip "false".length
-          let value = new Value(Type.Bool);
+          let value = Value.Bool;
           value.bool = false;
           return value;
         }
@@ -70,17 +70,17 @@ export class Parser {
   }
 
   parseObject(): Value | null {
-    var value = new Value(Type.Object);
+    var value = Value.Object;
     return value;
   }
 
   parseArray(): Value | null {
-    var value = new Value(Type.Array);
+    var value = Value.Array;
     return value;
   }
 
   parseString(): Value | null {
-    var value = new Value(Type.String);
+    var value = Value.String;
     return value;
   }
 
