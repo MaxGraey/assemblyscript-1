@@ -32,9 +32,8 @@ export class Parser {
       let offset = this.offset;
       let data   = changetype<usize>(this.data);
       if (load<u64>(data + (offset << 1), STRING_HEADER_SIZE) == NULL_FOUR_CC) {
-        let value = new Value(Type.Null);
         this.skipBytes(4); // skip "null".length
-        return value;
+        return new Value(Type.Null);
       }
     }
     // TODO print fancy error
@@ -46,11 +45,11 @@ export class Parser {
     if (this.length >= 4) { // 4 = "true".length
       let offset = this.offset;
       let data   = changetype<usize>(this.data);
-      let value  = new Value(Type.Bool);
 
       let fourChars = load<u64>(data + (offset << 1), STRING_HEADER_SIZE);
       if (fourChars == TRUE_FOUR_CC) {
         this.skipBytes(4); // skip "true".length
+        let value = new Value(Type.Bool);
         value.bool = true;
         return value;
       }
@@ -58,6 +57,7 @@ export class Parser {
       if (fourChars == FALS_FOUR_CC) {
         if (load<u16>(data + (offset << 1), STRING_HEADER_SIZE + (4 << 1)) == CharCode.e) {
           this.skipBytes(5); // skip "false".length
+          let value = new Value(Type.Bool);
           value.bool = false;
           return value;
         }
@@ -113,7 +113,8 @@ export class Parser {
       while (index < length && load<u64>(data + (index << 1), STRING_HEADER_SIZE) == SPACES_FOUR_CC) index += 4;
       while (index < length && load<u16>(data + (index << 1), STRING_HEADER_SIZE) == CharCode.SPACE) index += 1;
 
-      this.skipBytes(index + 1);
+      // this.skipBytes(index + 1);
+      this.skipBytes(index - offset);
       let code = load<u16>(data + ((this.offset + index) << 1), STRING_HEADER_SIZE);
       if (!isWhiteSpace(code)) return;
     }
