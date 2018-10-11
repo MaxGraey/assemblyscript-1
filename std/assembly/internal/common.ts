@@ -68,7 +68,7 @@ function fastPath(significand: f64, exp: i32): f64 {
 function fastStrToF64(d: f64, p: i32): bool {
   // Use fast path for string-to-double conversion if possible
   // see http://www.exploringbinary.com/fast-path-decimal-to-floating-point-conversion/
-  if (p > 22  && p < 22 + 16) {
+  if (p > 22 && p < 22 + 16) {
     d *= pow10(p - 22);
     p = 22;
   }
