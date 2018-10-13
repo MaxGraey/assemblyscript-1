@@ -173,7 +173,7 @@ export class Parser {
     var buffer = changetype<usize>(str);
     var length = str.length;
     store<u16>(buffer + (length++ << 1), code, STRING_HEADER_SIZE);
-    store<u16>(buffer, length, offsetof<String>("length"));
+    store<isize>(buffer, length, offsetof<String>("length"));
     return true;
   }
 
