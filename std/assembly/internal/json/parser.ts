@@ -1,6 +1,8 @@
 import {
   Type,
-  Value
+  Result,
+  Value,
+  KeyValue
 } from "./general";
 
 import {
@@ -15,16 +17,35 @@ const FALS_FOUR_CC: u64   = 0x00_73_00_6C_00_61_00_66; // "fals"
 const SPACES_FOUR_CC: u64 = 0x00_20_00_20_00_20_00_20; // "    "
 
 export class Parser {
-  offset: usize;
-  length: usize;
+  private offset: usize;
+  private length: usize;
+
+  private cachedValues:    Value[];
+  private cachedKeyValues: KeyValue[];
 
   constructor(public data: string) {
     this.offset = 0;
     this.length = data.length;
   }
 
-  parse(): bool {
-    return false;
+  destroy(): void {
+    Parser.destroyArray(this.cachedValues);
+    Parser.destroyArray(this.cachedKeyValues);
+  }
+
+  @inline
+  private static destroyArray<T>(array: T[]): void {
+    if (isReference<T>()) {
+      for (let i = 0, len = array.length; i < len; ++i) {
+        memory.free(changetype<usize>(unchecked(array[i])));
+      }
+    }
+    memory.free(changetype<usize>(array.buffer_));
+    memory.free(changetype<usize>(array));
+  }
+
+  parse(): Result {
+    return Result.Ok;
   }
 
   parseNull(): Value | null {

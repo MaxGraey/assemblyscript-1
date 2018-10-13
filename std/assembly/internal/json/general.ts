@@ -1,4 +1,6 @@
 
+export enum Result { Error, Ok }
+
 export enum Type {
   Array,
   Object,
@@ -9,7 +11,7 @@ export enum Type {
 }
 
 export class KeyValue {
-  key: string;
+  key:   string;
   value: Value;
 }
 
