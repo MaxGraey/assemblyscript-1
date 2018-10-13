@@ -8,21 +8,22 @@ export const MAX_LENGTH = (<i32>MAX_SIZE_32 - HEADER_SIZE) >>> 1;
 
 // Helpers
 export const enum CharCode {
-  NEWLINE = 0x0A, // '\n'
-  SPACE   = 0x20, // ' '
-  DQUOTE  = 0x22, // "
-  QUOTE   = 0x27, // '
-  PLUS    = 0x2B, // '+'
-  COMMA   = 0x2C, // ','
-  MINUS   = 0x2D, // '-'
-  DOT     = 0x2E, // '.'
-  COLON   = 0x3A, // ':'
-  LSBRT   = 0x5B, // '['
-  RSBRT   = 0x5D, // ']'
-  LCBRT   = 0x7B, // '{'
-  RCBRT   = 0x7D, // '}'
-  LSLASH  = 0x5C, // '\'
-  RSLASH  = 0x2F, // '/'
+  BACKSPACE   = 0x08, // '\b'
+  NEWLINE     = 0x0A, // '\n'
+  SPACE       = 0x20, // ' '
+  DBL_QUOTE   = 0x22, // "
+  QUOTE       = 0x27, // '
+  PLUS        = 0x2B, // '+'
+  COMMA       = 0x2C, // ','
+  MINUS       = 0x2D, // '-'
+  DOT         = 0x2E, // '.'
+  COLON       = 0x3A, // ':'
+  LEFT_SBRT   = 0x5B, // '['
+  RIGHT_SBRT  = 0x5D, // ']'
+  LEFT_CBRT   = 0x7B, // '{'
+  RIGHT_CBRT  = 0x7D, // '}'
+  LEFT_SLASH  = 0x5C, // '\'
+  RIGHT_SLASH = 0x2F, // '/'
 
   _0 = 0x30,
   _1 = 0x31,
@@ -43,6 +44,7 @@ export const enum CharCode {
   O = 0x4F,
   R = 0x52,
   T = 0x54,
+  U = 0x55,
   X = 0x58,
   Z = 0x5A,
 
@@ -54,6 +56,7 @@ export const enum CharCode {
   o = 0x6F,
   r = 0x72,
   t = 0x74,
+  u = 0x75,
   x = 0x78,
   z = 0x7A
 }
