@@ -2548,6 +2548,8 @@
              i32.eq
              local.get $3
              i32.const 2
+             i32.sub
+             i32.const 0
              i32.ge_s
              i32.and
              if
@@ -2686,8 +2688,8 @@
               i32.const 10
               i32.shl
               i32.add
-              i32.const -56613888
-              i32.add
+              i32.const 56613888
+              i32.sub
               local.set $1
              end
             end
@@ -2944,8 +2946,8 @@
   i32.const 10
   i32.shl
   i32.add
-  i32.const -56613888
-  i32.add
+  i32.const 56613888
+  i32.sub
  )
  (func $~lib/util/number/itoa64 (param $0 i64) (result i32)
   (local $1 i32)
