@@ -530,9 +530,13 @@ export class Compiler extends DiagnosticEmitter {
       }
     }
     var virtualCalls = this.virtualCalls;
-    for (let _values = Set_values(virtualCalls), i = 0, k = _values.length; i < k; ++i) {
-      let instance = unchecked(_values[i]);
-      this.finalizeVirtualStub(instance);
+    while (virtualCalls.size) {
+      // finalizing a stub may discover more virtual calls, so do this in a loop
+      for (let _values = Set_values(virtualCalls), i = 0, k = _values.length; i < k; ++i) {
+        let instance = unchecked(_values[i]);
+        this.finalizeVirtualStub(instance);
+        virtualCalls.delete(instance);
+      }
     }
 
     // finalize runtime features
@@ -10508,8 +10512,12 @@ export class Compiler extends DiagnosticEmitter {
       }
     }
     var parameterTypes = signature.parameterTypes;
+    var parameterNodes = reportNode.parameters;
     for (let i = 0, k = parameterTypes.length; i < k; ++i) {
-      if (!this.checkTypeSupported(parameterTypes[i], reportNode.parameters[i])) {
+      let parameterReportNode: Node;
+      if (parameterNodes.length > i) parameterReportNode = parameterNodes[i];
+      else parameterReportNode = reportNode;
+      if (!this.checkTypeSupported(parameterTypes[i], parameterReportNode)) {
         supported = false;
       }
     }
