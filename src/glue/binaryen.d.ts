@@ -401,8 +401,6 @@ export declare function _BinaryenMaxSVecI32x4(): BinaryenOp;
 export declare function _BinaryenMaxUVecI32x4(): BinaryenOp;
 export declare function _BinaryenDotSVecI16x8ToVecI32x4(): BinaryenOp;
 export declare function _BinaryenNegVecI64x2(): BinaryenOp;
-export declare function _BinaryenAnyTrueVecI64x2(): BinaryenOp;
-export declare function _BinaryenAllTrueVecI64x2(): BinaryenOp;
 export declare function _BinaryenShlVecI64x2(): BinaryenOp;
 export declare function _BinaryenShrSVecI64x2(): BinaryenOp;
 export declare function _BinaryenShrUVecI64x2(): BinaryenOp;
