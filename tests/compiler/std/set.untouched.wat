@@ -17,11 +17,6 @@
  (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
  (type $i32_i32_=>_i64 (func (param i32 i32) (result i64)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
-<<<<<<< HEAD
- (type $i64_=>_i32 (func (param i64) (result i32)))
- (type $i32_f32_i32_=>_i32 (func (param i32 f32 i32) (result i32)))
- (type $i32_f64_i32_=>_i32 (func (param i32 f64 i32) (result i32)))
-=======
  (type $i32_f32_=>_none (func (param i32 f32)))
  (type $i32_f64_=>_none (func (param i32 f64)))
  (type $none_=>_i32 (func (result i32)))
@@ -31,7 +26,6 @@
  (type $i32_f64_i32_=>_i32 (func (param i32 f64 i32) (result i32)))
  (type $i32_i32_=>_f32 (func (param i32 i32) (result f32)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
->>>>>>> master
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (memory $0 1)
  (data (i32.const 12) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00A\00l\00l\00o\00c\00a\00t\00i\00o\00n\00 \00t\00o\00o\00 \00l\00a\00r\00g\00e\00\00\00\00\00")

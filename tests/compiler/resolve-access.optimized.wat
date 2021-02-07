@@ -4,16 +4,10 @@
  (type $none_=>_none (func))
  (type $i32_=>_none (func (param i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
-<<<<<<< HEAD
- (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
- (type $i32_=>_i32 (func (param i32) (result i32)))
-=======
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
->>>>>>> master
  (type $i64_=>_i32 (func (param i64) (result i32)))
- (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (memory $0 1)
  (data (i32.const 1036) "\1c")

@@ -2,16 +2,12 @@
  (type $none_=>_none (func))
  (type $i32_i32_=>_none (func (param i32 i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
-<<<<<<< HEAD
-=======
  (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_none (func (param i32)))
  (type $none_=>_i32 (func (result i32)))
->>>>>>> master
  (type $f32_=>_i32 (func (param f32) (result i32)))
  (type $f64_=>_i32 (func (param f64) (result i32)))
- (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $i64_i32_i64_i32_i64_=>_i32 (func (param i64 i32 i64 i32 i64) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
