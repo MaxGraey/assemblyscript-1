@@ -1506,7 +1506,7 @@ export class Compiler extends DiagnosticEmitter {
       if (!this.compileFunctionBody(instance, stmts)) {
         stmts.push(module.unreachable());
       }
-     
+
       this.currentFlow = previousFlow;
 
       // create the function
@@ -4929,9 +4929,9 @@ export class Compiler extends DiagnosticEmitter {
         return module.binary(BinaryOp.EqF64, leftExpr, rightExpr);
       }
       case TypeKind.V128: {
-        return module.unary(UnaryOp.AllTrueI8x16,
-          module.binary(BinaryOp.EqI8x16, leftExpr, rightExpr)
-        );
+        // return module.unary(UnaryOp.AllTrueI8x16,
+        //   module.binary(BinaryOp.EqI8x16, leftExpr, rightExpr)
+        // );
       }
       case TypeKind.FUNCREF:
       case TypeKind.EXTERNREF:
@@ -4988,9 +4988,9 @@ export class Compiler extends DiagnosticEmitter {
         return module.binary(BinaryOp.NeF64, leftExpr, rightExpr);
       }
       case TypeKind.V128: {
-        return module.unary(UnaryOp.AnyTrueI8x16,
-          module.binary(BinaryOp.NeI8x16, leftExpr, rightExpr)
-        );
+        // return module.unary(UnaryOp.AnyTrueI8x16,
+        //   module.binary(BinaryOp.NeI8x16, leftExpr, rightExpr)
+        // );
       }
       case TypeKind.FUNCREF:
       case TypeKind.EXTERNREF:
@@ -7473,7 +7473,7 @@ export class Compiler extends DiagnosticEmitter {
         expr = module.local_tee(local.index, expr, ftype.isManaged);
       }
     }
-    
+
     return expr;
   }
 

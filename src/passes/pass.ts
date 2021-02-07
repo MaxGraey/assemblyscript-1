@@ -801,13 +801,13 @@ export abstract class Visitor {
         this.visitRefNull(expr);
         break;
       }
-      case ExpressionId.RefIsNull: {
-        this.stack.push(expr);
-        this.visit(_BinaryenRefIsNullGetValue(expr));
-        assert(this.stack.pop() == expr);
-        this.visitRefIsNull(expr);
-        break;
-      }
+      // case ExpressionId.RefIsNull: {
+      //   this.stack.push(expr);
+      //   this.visit(_BinaryenRefIsNullGetValue(expr));
+      //   assert(this.stack.pop() == expr);
+      //   this.visitRefIsNull(expr);
+      //   break;
+      // }
       case ExpressionId.RefFunc: {
         this.stack.push(expr);
         this.visitName(_BinaryenRefFuncGetFunc(expr));
@@ -849,15 +849,15 @@ export abstract class Visitor {
         this.visitRethrow(expr);
         break;
       }
-      case ExpressionId.BrOnExn: {
-        this.stack.push(expr);
-        this.visitEvent(_BinaryenBrOnExnGetEvent(expr));
-        this.visitLabel(_BinaryenBrOnExnGetName(expr));
-        this.visit(_BinaryenBrOnExnGetExnref(expr));
-        assert(this.stack.pop() == expr);
-        this.visitBrOnExn(expr);
-        break;
-      }
+      // case ExpressionId.BrOnExn: {
+      //   this.stack.push(expr);
+      //   this.visitEvent(_BinaryenBrOnExnGetEvent(expr));
+      //   this.visitLabel(_BinaryenBrOnExnGetName(expr));
+      //   this.visit(_BinaryenBrOnExnGetExnref(expr));
+      //   assert(this.stack.pop() == expr);
+      //   this.visitBrOnExn(expr);
+      //   break;
+      // }
       case ExpressionId.TupleMake: {
         let numOperands = _BinaryenTupleMakeGetNumOperands(expr);
         if (numOperands) {
@@ -912,13 +912,13 @@ export abstract class Visitor {
         this.visitRefCast(expr);
         break;
       }
-      case ExpressionId.BrOnCast: {
-        this.stack.push(expr);
-        assert(false); // TODO
-        assert(this.stack.pop() == expr);
-        this.visitBrOnCast(expr);
-        break;
-      }
+      // case ExpressionId.BrOnCast: {
+      //   this.stack.push(expr);
+      //   assert(false); // TODO
+      //   assert(this.stack.pop() == expr);
+      //   this.visitBrOnCast(expr);
+      //   break;
+      // }
       case ExpressionId.RttCanon: {
         this.stack.push(expr);
         assert(false); // TODO
@@ -1492,14 +1492,14 @@ export function replaceChild(
     case ExpressionId.RefNull: {
       break;
     }
-    case ExpressionId.RefIsNull: {
-      let value = _BinaryenRefIsNullGetValue(parent);
-      if (value == search) {
-        _BinaryenRefIsNullSetValue(parent, replacement);
-        return value;
-      }
-      break;
-    }
+    // case ExpressionId.RefIsNull: {
+    //   let value = _BinaryenRefIsNullGetValue(parent);
+    //   if (value == search) {
+    //     _BinaryenRefIsNullSetValue(parent, replacement);
+    //     return value;
+    //   }
+    //   break;
+    // }
     case ExpressionId.RefFunc: {
       break;
     }
@@ -1548,14 +1548,14 @@ export function replaceChild(
       }
       break;
     }
-    case ExpressionId.BrOnExn: {
-      let exnref = _BinaryenBrOnExnGetExnref(parent);
-      if (exnref == search) {
-        _BinaryenBrOnExnSetExnref(parent, replacement);
-        return exnref;
-      }
-      break;
-    }
+    // case ExpressionId.BrOnExn: {
+    //   let exnref = _BinaryenBrOnExnGetExnref(parent);
+    //   if (exnref == search) {
+    //     _BinaryenBrOnExnSetExnref(parent, replacement);
+    //     return exnref;
+    //   }
+    //   break;
+    // }
     case ExpressionId.TupleMake: {
       let numOperands = _BinaryenTupleMakeGetNumOperands(parent);
       for (let i: Index = 0; i < numOperands; ++i) {
@@ -1595,10 +1595,10 @@ export function replaceChild(
       assert(false); // TODO
       break;
     }
-    case ExpressionId.BrOnCast: {
-      assert(false); // TODO
-      break;
-    }
+    // case ExpressionId.BrOnCast: {
+    //   assert(false); // TODO
+    //   break;
+    // }
     case ExpressionId.RttCanon: {
       assert(false); // TODO
       break;

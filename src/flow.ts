@@ -305,7 +305,6 @@ export class Flow {
       case <u32>NativeType.V128: { temps = parentFunction.tempV128s; break; }
       case <u32>NativeType.Funcref: { temps = parentFunction.tempFuncrefs; break; }
       case <u32>NativeType.Externref: { temps = parentFunction.tempExternrefs; break; }
-      case <u32>NativeType.Exnref: { temps = parentFunction.tempExnrefs; break; }
       case <u32>NativeType.Anyref: { temps = parentFunction.tempAnyrefs; break; }
       default: throw new Error("concrete type expected");
     }
@@ -388,12 +387,6 @@ export class Flow {
         let tempExternrefs = parentFunction.tempExternrefs;
         if (tempExternrefs) temps = tempExternrefs;
         else parentFunction.tempExternrefs = temps = [];
-        break;
-      }
-      case <u32>NativeType.Exnref: {
-        let tempExnrefs = parentFunction.tempExnrefs;
-        if (tempExnrefs) temps = tempExnrefs;
-        else parentFunction.tempExnrefs = temps = [];
         break;
       }
       case <u32>NativeType.Anyref: {
@@ -898,7 +891,7 @@ export class Flow {
         let key = _keys[i];
         let leftFlags = changetype<FieldFlags>(leftFieldFlags.get(key));
         if (
-          (leftFlags & FieldFlags.INITIALIZED) != 0 && rightFieldFlags.has(key) && 
+          (leftFlags & FieldFlags.INITIALIZED) != 0 && rightFieldFlags.has(key) &&
           (changetype<FieldFlags>(rightFieldFlags.get(key)) & FieldFlags.INITIALIZED)
         ) {
           newFieldFlags.set(key, FieldFlags.INITIALIZED);

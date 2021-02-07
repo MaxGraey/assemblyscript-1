@@ -3072,8 +3072,8 @@ export class File extends Element {
 
   /** Creates an imported namespace from this file. */
   asAliasNamespace(
-    name: string, 
-    parent: Element, 
+    name: string,
+    parent: Element,
     localIdentifier: IdentifierExpression
   ): Namespace {
     var declaration = this.program.makeNativeNamespaceDeclaration(name);
@@ -3681,7 +3681,6 @@ export class Function extends TypedElement {
   tempV128s: Local[] | null = null;
   tempFuncrefs: Local[] | null = null;
   tempExternrefs: Local[] | null = null;
-  tempExnrefs: Local[] | null = null;
   tempAnyrefs: Local[] | null = null;
 
   // used by flows to keep track of break labels

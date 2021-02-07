@@ -5341,6 +5341,7 @@ function builtin_v128_bitselect(ctx: BuiltinContext): ExpressionRef {
 builtins.set(BuiltinNames.v128_bitselect, builtin_v128_bitselect);
 
 // v128.any_true<T!>(a: v128) -> bool
+/*
 function builtin_v128_any_true(ctx: BuiltinContext): ExpressionRef {
   var compiler = ctx.compiler;
   var module = compiler.module;
@@ -5429,6 +5430,7 @@ function builtin_v128_all_true(ctx: BuiltinContext): ExpressionRef {
   return module.unreachable();
 }
 builtins.set(BuiltinNames.v128_all_true, builtin_v128_all_true);
+*/
 
 // v128.bitmask<T!>(a: v128) -> i32
 function builtin_v128_bitmask(ctx: BuiltinContext): ExpressionRef {
@@ -7094,22 +7096,22 @@ function builtin_i8x16_shr_u(ctx: BuiltinContext): ExpressionRef {
 builtins.set(BuiltinNames.i8x16_shr_u, builtin_i8x16_shr_u);
 
 // i8x16.any_true -> v128.any_true<i8>
-function builtin_i8x16_any_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i8 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_any_true(ctx);
-}
-builtins.set(BuiltinNames.i8x16_any_true, builtin_i8x16_any_true);
+// function builtin_i8x16_any_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i8 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_any_true(ctx);
+// }
+// builtins.set(BuiltinNames.i8x16_any_true, builtin_i8x16_any_true);
 
 // i8x16.all_true -> v128.all_true<i8>
-function builtin_i8x16_all_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i8 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_all_true(ctx);
-}
-builtins.set(BuiltinNames.i8x16_all_true, builtin_i8x16_all_true);
+// function builtin_i8x16_all_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i8 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_all_true(ctx);
+// }
+// builtins.set(BuiltinNames.i8x16_all_true, builtin_i8x16_all_true);
 
 // i8x16.bitmask -> v128.bitmask<i8>
 function builtin_i8x16_bitmask(ctx: BuiltinContext): ExpressionRef {
@@ -7418,22 +7420,22 @@ function builtin_i16x8_shr_u(ctx: BuiltinContext): ExpressionRef {
 builtins.set(BuiltinNames.i16x8_shr_u, builtin_i16x8_shr_u);
 
 // i16x8.any_true -> v128.any_true<i16>
-function builtin_i16x8_any_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i16 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_any_true(ctx);
-}
-builtins.set(BuiltinNames.i16x8_any_true, builtin_i16x8_any_true);
+// function builtin_i16x8_any_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i16 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_any_true(ctx);
+// }
+// builtins.set(BuiltinNames.i16x8_any_true, builtin_i16x8_any_true);
 
 // i16x8.all_true -> v128.all_true<i16>
-function builtin_i16x8_all_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i16 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_all_true(ctx);
-}
-builtins.set(BuiltinNames.i16x8_all_true, builtin_i16x8_all_true);
+// function builtin_i16x8_all_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i16 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_all_true(ctx);
+// }
+// builtins.set(BuiltinNames.i16x8_all_true, builtin_i16x8_all_true);
 
 // i16x8.bitmask -> v128.bitmask<i16>
 function builtin_i16x8_bitmask(ctx: BuiltinContext): ExpressionRef {
@@ -7751,22 +7753,22 @@ function builtin_i32x4_shr_u(ctx: BuiltinContext): ExpressionRef {
 builtins.set(BuiltinNames.i32x4_shr_u, builtin_i32x4_shr_u);
 
 // i32x4.any_true -> v128.any_true<i32>
-function builtin_i32x4_any_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i32 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_any_true(ctx);
-}
-builtins.set(BuiltinNames.i32x4_any_true, builtin_i32x4_any_true);
+// function builtin_i32x4_any_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i32 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_any_true(ctx);
+// }
+// builtins.set(BuiltinNames.i32x4_any_true, builtin_i32x4_any_true);
 
 // i32x4.all_true -> v128.all_true<i32>
-function builtin_i32x4_all_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i32 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_all_true(ctx);
-}
-builtins.set(BuiltinNames.i32x4_all_true, builtin_i32x4_all_true);
+// function builtin_i32x4_all_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i32 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_all_true(ctx);
+// }
+// builtins.set(BuiltinNames.i32x4_all_true, builtin_i32x4_all_true);
 
 // i32x4.bitmask -> v128.bitmask<i32>
 function builtin_i32x4_bitmask(ctx: BuiltinContext): ExpressionRef {
@@ -8021,22 +8023,22 @@ function builtin_i64x2_shr_u(ctx: BuiltinContext): ExpressionRef {
 builtins.set(BuiltinNames.i64x2_shr_u, builtin_i64x2_shr_u);
 
 // i64x2.any_true -> v128.any_true<i64>
-function builtin_i64x2_any_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i64 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_any_true(ctx);
-}
-builtins.set(BuiltinNames.i64x2_any_true, builtin_i64x2_any_true);
+// function builtin_i64x2_any_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i64 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_any_true(ctx);
+// }
+// builtins.set(BuiltinNames.i64x2_any_true, builtin_i64x2_any_true);
 
 // i64x2.all_true -> v128.all_true<i64>
-function builtin_i64x2_all_true(ctx: BuiltinContext): ExpressionRef {
-  checkTypeAbsent(ctx);
-  ctx.typeArguments = [ Type.i64 ];
-  ctx.contextualType = Type.i32;
-  return builtin_v128_all_true(ctx);
-}
-builtins.set(BuiltinNames.i64x2_all_true, builtin_i64x2_all_true);
+// function builtin_i64x2_all_true(ctx: BuiltinContext): ExpressionRef {
+//   checkTypeAbsent(ctx);
+//   ctx.typeArguments = [ Type.i64 ];
+//   ctx.contextualType = Type.i32;
+//   return builtin_v128_all_true(ctx);
+// }
+// builtins.set(BuiltinNames.i64x2_all_true, builtin_i64x2_all_true);
 
 // i64x2.trunc_sat_f64x2_s -> v128.trunc_sat<i64>
 function builtin_i64x2_trunc_sat_f64x2_s(ctx: BuiltinContext): ExpressionRef {

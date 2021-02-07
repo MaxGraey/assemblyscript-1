@@ -218,7 +218,7 @@ export class Type {
   get isFloatValue(): bool {
     return this.is(TypeFlags.FLOAT | TypeFlags.VALUE);
   }
-  
+
   /** Tests if this type represents a numeric (integer or floating point) value. */
   get isNumericValue(): bool {
     return this.isIntegerValue || this.isFloatValue;
@@ -233,7 +233,7 @@ export class Type {
   get isVectorValue(): bool {
     return this.is(TypeFlags.VECTOR | TypeFlags.VALUE);
   }
-  
+
   /** Tests if this type represents an internal or external reference. */
   get isReference(): bool {
     return this.is(TypeFlags.REFERENCE);
@@ -526,7 +526,6 @@ export class Type {
       case TypeKind.V128: return NativeType.V128;
       case TypeKind.FUNCREF: return NativeType.Funcref;
       case TypeKind.EXTERNREF: return NativeType.Externref;
-      case TypeKind.EXNREF: return NativeType.Exnref;
       case TypeKind.ANYREF: return NativeType.Anyref;
       case TypeKind.VOID: return NativeType.None;
     }
